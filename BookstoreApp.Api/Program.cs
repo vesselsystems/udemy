@@ -1,4 +1,6 @@
 using Serilog;
+using Microsoft.EntityFrameworkCore;
+using BookstoreApp.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,10 @@ builder.Host.UseSerilog((context, loggerConfig) =>
         .ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
+
+var connectionString = builder.Configuration.GetConnectionString("BookstoreDbConnection");
+builder.Services.AddDbContext<BookstoreDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddCors(options =>
 {
