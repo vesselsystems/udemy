@@ -1,6 +1,7 @@
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using BookstoreApp.Api.Data;
+using BookstoreApp.Api.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 var app = builder.Build();
 
